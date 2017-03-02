@@ -188,88 +188,73 @@ module.exports =
   // Register server-side rendering middleware
   // -----------------------------------------------------------------------------
   app.get('*', function () {
-    var _ref = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee2(req, res, next) {
-      return _regenerator2.default.wrap(function _callee2$(_context2) {
+    var _ref = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee(req, res, next) {
+      var css, statusCode, data, html;
+      return _regenerator2.default.wrap(function _callee$(_context) {
         while (1) {
-          switch (_context2.prev = _context2.next) {
+          switch (_context.prev = _context.next) {
             case 0:
-              _context2.prev = 0;
-              return _context2.delegateYield(_regenerator2.default.mark(function _callee() {
-                var css, statusCode, data, html;
-                return _regenerator2.default.wrap(function _callee$(_context) {
-                  while (1) {
-                    switch (_context.prev = _context.next) {
-                      case 0:
-                        css = new _set2.default();
-                        statusCode = 200;
-                        data = { title: '', description: '', style: '', script: _assets2.default.main.js, children: '' };
-                        _context.next = 5;
-                        return _universalRouter2.default.resolve(_routes2.default, {
-                          path: req.path,
-                          query: req.query,
-                          context: {
-                            insertCss: function insertCss() {
-                              for (var _len = arguments.length, styles = Array(_len), _key = 0; _key < _len; _key++) {
-                                styles[_key] = arguments[_key];
-                              }
-  
-                              styles.forEach(function (style) {
-                                return css.add(style._getCss());
-                              }); // eslint-disable-line no-underscore-dangle, max-len
-                            },
-                            setTitle: function setTitle(value) {
-                              return data.title = value;
-                            },
-                            setMeta: function setMeta(key, value) {
-                              return data[key] = value;
-                            }
-                          },
-                          render: function render(component) {
-                            var status = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 200;
-  
-                            // console.log('inside render of UniversalRouter', component);
-                            css = new _set2.default();
-                            statusCode = status;
-                            data.children = _server2.default.renderToString(component);
-                            data.style = [].concat((0, _toConsumableArray3.default)(css)).join('');
-                            return true;
-                          }
-                        });
-  
-                      case 5:
-  
-                        // console.log('outside render func of UniversalRouter with statusCode', statusCode);
-                        html = _server2.default.renderToStaticMarkup(_react2.default.createElement(_Html2.default, data));
-  
-  
-                        res.status(statusCode);
-                        res.send('<!doctype html>' + html);
-  
-                      case 8:
-                      case 'end':
-                        return _context.stop();
+              _context.prev = 0;
+              css = new _set2.default();
+              statusCode = 200;
+              data = { title: '', description: '', style: '', script: _assets2.default.main.js, children: '' };
+              _context.next = 6;
+              return _universalRouter2.default.resolve(_routes2.default, {
+                path: req.path,
+                query: req.query,
+                context: {
+                  insertCss: function insertCss() {
+                    for (var _len = arguments.length, styles = Array(_len), _key = 0; _key < _len; _key++) {
+                      styles[_key] = arguments[_key];
                     }
-                  }
-                }, _callee, undefined);
-              })(), 't0', 2);
   
-            case 2:
-              _context2.next = 7;
+                    styles.forEach(function (style) {
+                      return css.add(style._getCss());
+                    }); // eslint-disable-line no-underscore-dangle, max-len
+                  },
+                  setTitle: function setTitle(value) {
+                    return data.title = value;
+                  },
+                  setMeta: function setMeta(key, value) {
+                    return data[key] = value;
+                  }
+                },
+                render: function render(component) {
+                  var status = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 200;
+  
+                  // console.log('inside render of UniversalRouter', component);
+                  css = new _set2.default();
+                  statusCode = status;
+                  data.children = _server2.default.renderToString(component);
+                  data.style = [].concat((0, _toConsumableArray3.default)(css)).join('');
+                  return true;
+                }
+              });
+  
+            case 6:
+  
+              // console.log('outside render func of UniversalRouter with statusCode', statusCode);
+              html = _server2.default.renderToStaticMarkup(_react2.default.createElement(_Html2.default, data));
+  
+  
+              res.status(statusCode);
+              res.send('<!doctype html>' + html);
+              _context.next = 14;
               break;
   
-            case 4:
-              _context2.prev = 4;
-              _context2.t1 = _context2['catch'](0);
+            case 11:
+              _context.prev = 11;
+              _context.t0 = _context['catch'](0);
   
               // console.log('some error occured', err);
-              next(_context2.t1);
+              next(_context.t0);
   
-            case 7:
+            case 14:
             case 'end':
-              return _context2.stop();
+              return _context.stop();
           }
         }
-      }, _callee2, undefined, [[0, 4]]);
+      }, _callee, undefined, [[0, 11]]);
     }));
   
     return function (_x, _x2, _x3) {
@@ -425,11 +410,11 @@ module.exports =
   function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
   
   function Html(_ref) {
-    var title = _ref.title;
-    var description = _ref.description;
-    var style = _ref.style;
-    var script = _ref.script;
-    var children = _ref.children;
+    var title = _ref.title,
+        description = _ref.description,
+        style = _ref.style,
+        script = _ref.script,
+        children = _ref.children;
   
     return _react2.default.createElement(
       'html',
@@ -637,8 +622,8 @@ module.exports =
       // Only activated in browser context
       if (false) {
         var removeCss = function() {};
-        module.hot.accept("!!./../../../node_modules/css-loader/index.js?{\"sourceMap\":true,\"modules\":true,\"localIdentName\":\"[name]_[local]_[hash:base64:3]\",\"minimize\":false}!./../../../node_modules/postcss-loader/index.js?pack=default!./ErrorPage.css", function() {
-          content = require("!!./../../../node_modules/css-loader/index.js?{\"sourceMap\":true,\"modules\":true,\"localIdentName\":\"[name]_[local]_[hash:base64:3]\",\"minimize\":false}!./../../../node_modules/postcss-loader/index.js?pack=default!./ErrorPage.css");
+        module.hot.accept("!!../../../node_modules/css-loader/index.js?{\"sourceMap\":true,\"modules\":true,\"localIdentName\":\"[name]_[local]_[hash:base64:3]\",\"minimize\":false}!../../../node_modules/postcss-loader/index.js?pack=default!./ErrorPage.css", function() {
+          content = require("!!../../../node_modules/css-loader/index.js?{\"sourceMap\":true,\"modules\":true,\"localIdentName\":\"[name]_[local]_[hash:base64:3]\",\"minimize\":false}!../../../node_modules/postcss-loader/index.js?pack=default!./ErrorPage.css");
   
           if (typeof content === 'string') {
             content = [[module.id, content, '']];
@@ -1521,9 +1506,9 @@ module.exports =
     action: function action(_ref) {
       var _this = this;
   
-      var next = _ref.next;
-      var render = _ref.render;
-      var context = _ref.context;
+      var next = _ref.next,
+          render = _ref.render,
+          context = _ref.context;
       return (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee() {
         var component;
         return _regenerator2.default.wrap(function _callee$(_context) {
@@ -1575,9 +1560,9 @@ module.exports =
     action: function action(_ref2) {
       var _this2 = this;
   
-      var next = _ref2.next;
-      var render = _ref2.render;
-      var context = _ref2.context;
+      var next = _ref2.next,
+          render = _ref2.render,
+          context = _ref2.context;
       return (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee2() {
         var component;
         return _regenerator2.default.wrap(function _callee2$(_context2) {
@@ -1627,9 +1612,9 @@ module.exports =
     action: function action(_ref3) {
       var _this3 = this;
   
-      var next = _ref3.next;
-      var render = _ref3.render;
-      var context = _ref3.context;
+      var next = _ref3.next,
+          render = _ref3.render,
+          context = _ref3.context;
       return (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee3() {
         var component;
         return _regenerator2.default.wrap(function _callee3$(_context3) {
@@ -1850,8 +1835,8 @@ module.exports =
       // Only activated in browser context
       if (false) {
         var removeCss = function() {};
-        module.hot.accept("!!./../../../node_modules/css-loader/index.js?{\"sourceMap\":true,\"modules\":true,\"localIdentName\":\"[name]_[local]_[hash:base64:3]\",\"minimize\":false}!./../../../node_modules/postcss-loader/index.js?pack=default!./App.css", function() {
-          content = require("!!./../../../node_modules/css-loader/index.js?{\"sourceMap\":true,\"modules\":true,\"localIdentName\":\"[name]_[local]_[hash:base64:3]\",\"minimize\":false}!./../../../node_modules/postcss-loader/index.js?pack=default!./App.css");
+        module.hot.accept("!!../../../node_modules/css-loader/index.js?{\"sourceMap\":true,\"modules\":true,\"localIdentName\":\"[name]_[local]_[hash:base64:3]\",\"minimize\":false}!../../../node_modules/postcss-loader/index.js?pack=default!./App.css", function() {
+          content = require("!!../../../node_modules/css-loader/index.js?{\"sourceMap\":true,\"modules\":true,\"localIdentName\":\"[name]_[local]_[hash:base64:3]\",\"minimize\":false}!../../../node_modules/postcss-loader/index.js?pack=default!./App.css");
   
           if (typeof content === 'string') {
             content = [[module.id, content, '']];
@@ -3607,8 +3592,8 @@ module.exports =
       // Only activated in browser context
       if (false) {
         var removeCss = function() {};
-        module.hot.accept("!!./../../../node_modules/css-loader/index.js?{\"sourceMap\":true,\"modules\":true,\"localIdentName\":\"[name]_[local]_[hash:base64:3]\",\"minimize\":false}!./../../../node_modules/postcss-loader/index.js?pack=default!./Home.css", function() {
-          content = require("!!./../../../node_modules/css-loader/index.js?{\"sourceMap\":true,\"modules\":true,\"localIdentName\":\"[name]_[local]_[hash:base64:3]\",\"minimize\":false}!./../../../node_modules/postcss-loader/index.js?pack=default!./Home.css");
+        module.hot.accept("!!../../../node_modules/css-loader/index.js?{\"sourceMap\":true,\"modules\":true,\"localIdentName\":\"[name]_[local]_[hash:base64:3]\",\"minimize\":false}!../../../node_modules/postcss-loader/index.js?pack=default!./Home.css", function() {
+          content = require("!!../../../node_modules/css-loader/index.js?{\"sourceMap\":true,\"modules\":true,\"localIdentName\":\"[name]_[local]_[hash:base64:3]\",\"minimize\":false}!../../../node_modules/postcss-loader/index.js?pack=default!./Home.css");
   
           if (typeof content === 'string') {
             content = [[module.id, content, '']];
@@ -3877,9 +3862,9 @@ module.exports =
     (0, _createClass3.default)(Link, [{
       key: 'render',
       value: function render() {
-        var _props = this.props;
-        var to = _props.to;
-        var props = (0, _objectWithoutProperties3.default)(_props, ['to']); // eslint-disable-line no-use-before-define
+        var _props = this.props,
+            to = _props.to,
+            props = (0, _objectWithoutProperties3.default)(_props, ['to']); // eslint-disable-line no-use-before-define
   
         return _react2.default.createElement('a', (0, _extends3.default)({ href: _history2.default.createHref(to) }, props, { onClick: this.handleClick }));
       }
@@ -3960,17 +3945,17 @@ module.exports =
   // import { PieCharts, Pie, Sector, ResponsiveContainer } from '../../vendor/recharts';
   var renderActiveShape = function renderActiveShape(props) {
     var RADIAN = Math.PI / 180;
-    var cx = props.cx;
-    var cy = props.cy;
-    var midAngle = props.midAngle;
-    var innerRadius = props.innerRadius;
-    var outerRadius = props.outerRadius;
-    var startAngle = props.startAngle;
-    var endAngle = props.endAngle;
-    var fill = props.fill;
-    var payload = props.payload;
-    var percent = props.percent;
-    var value = props.value;
+    var cx = props.cx,
+        cy = props.cy,
+        midAngle = props.midAngle,
+        innerRadius = props.innerRadius,
+        outerRadius = props.outerRadius,
+        startAngle = props.startAngle,
+        endAngle = props.endAngle,
+        fill = props.fill,
+        payload = props.payload,
+        percent = props.percent,
+        value = props.value;
   
     var sin = Math.sin(-RADIAN * midAngle);
     var cos = Math.cos(-RADIAN * midAngle);
@@ -21522,8 +21507,8 @@ module.exports =
       // Only activated in browser context
       if (false) {
         var removeCss = function() {};
-        module.hot.accept("!!./../../../node_modules/css-loader/index.js?{\"sourceMap\":true,\"modules\":true,\"localIdentName\":\"[name]_[local]_[hash:base64:3]\",\"minimize\":false}!./../../../node_modules/postcss-loader/index.js?pack=default!./Login.css", function() {
-          content = require("!!./../../../node_modules/css-loader/index.js?{\"sourceMap\":true,\"modules\":true,\"localIdentName\":\"[name]_[local]_[hash:base64:3]\",\"minimize\":false}!./../../../node_modules/postcss-loader/index.js?pack=default!./Login.css");
+        module.hot.accept("!!../../../node_modules/css-loader/index.js?{\"sourceMap\":true,\"modules\":true,\"localIdentName\":\"[name]_[local]_[hash:base64:3]\",\"minimize\":false}!../../../node_modules/postcss-loader/index.js?pack=default!./Login.css", function() {
+          content = require("!!../../../node_modules/css-loader/index.js?{\"sourceMap\":true,\"modules\":true,\"localIdentName\":\"[name]_[local]_[hash:base64:3]\",\"minimize\":false}!../../../node_modules/postcss-loader/index.js?pack=default!./Login.css");
   
           if (typeof content === 'string') {
             content = [[module.id, content, '']];
@@ -30672,9 +30657,9 @@ module.exports =
     path: '/error',
   
     action: function action(_ref) {
-      var render = _ref.render;
-      var context = _ref.context;
-      var error = _ref.error;
+      var render = _ref.render,
+          context = _ref.context,
+          error = _ref.error;
   
       // console.log('error obj inside error index.js', error);
       return render(_react2.default.createElement(
